@@ -1,0 +1,11 @@
+{
+  "siteName": "LudoScore",
+  "tagline": "Compteur de points pour jeux de société",
+  "footerText": "© Nadak 2025",
+  "storage": {
+    "ttlHours": 24
+  },
+  "ui": {
+    "defaultAccent": "#6ee7ff"
+  }
+}
