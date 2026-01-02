@@ -1,17 +1,12 @@
 {
-  "name": "ScorePad",
-  "short_name": "ScorePad",
-  "start_url": "./#/",
+  "name": "LudoScore",
+  "short_name": "LudoScore",
+  "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#0b0f14",
-  "theme_color": "#0b0f14",
-  "description": "Compteur de points minimaliste pour jeux de société.",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
   "icons": [
-    {
-      "src": "assets/logo-site.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
+    { "src": "assets/logo.svg", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/logo.svg", "sizes": "512x512", "type": "image/png" }
   ]
 }
