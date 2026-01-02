@@ -29,6 +29,16 @@
       "minPlayers": 2,
       "maxPlayers": 10,
       "scoringHelp": "Ajouter une manche, entrer les scores, valider. Annuler possible sur la dernière manche."
+    },
+    {
+      "id": "unozero",
+      "name": "Uno Zero",
+      "accent": "#fef300",
+      "logo": "assets/games/flip7.svg",
+      "rulesPdf": "assets/rules/flip7.pdf",
+      "minPlayers": 2,
+      "maxPlayers": 10,
+      "scoringHelp": "Ajouter une manche, entrer les scores, valider. Annuler possible sur la dernière manche."
     }
   ]
 }
