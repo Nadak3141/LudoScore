@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f14" />
+  <title>ScorePad</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/logo-site.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- jsPDF (export PDF) -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand" role="button" tabindex="0" data-nav="home" aria-label="Retour accueil">
+      <img class="brand__logo" src="assets/logo-site.svg" alt="Logo du site" />
+      <div class="brand__text">
+        <div class="brand__name" id="siteName">ScorePad</div>
+        <div class="brand__tagline" id="siteTagline">Compteur de points</div>
+      </div>
+    </div>
+
+    <nav class="topbar__nav">
+      <button class="btn btn--ghost" id="btnHistory" title="Historique">Historique</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="viewHome" class="view view--active" aria-label="Accueil">
+      <div class="homeHead">
+        <h1>Choisir un jeu</h1>
+        <p class="muted">Tuiles par jeu, thème sombre, accent couleur par jeu.</p>
+      </div>
+      <div id="gamesGrid" class="grid"></div>
+    </section>
+
+    <!-- GAME -->
+    <section id="viewGame" class="view" aria-label="Jeu">
+      <div class="gameHead">
+        <button class="btn btn--ghost" id="btnBack">← Accueil</button>
+
+        <div class="gameTitle">
+          <img id="gameLogo" class="gameTitle__logo" alt="" />
+          <div>
+            <h2 id="gameName">Jeu</h2>
+            <div id="gameMeta" class="muted"></div>
+          </div>
+        </div>
+
+        <div class="gameActions">
+          <button class="btn" id="btnOpenRules">Règles (PDF)</button>
+          <button class="btn btn--ghost" id="btnGoHistory">Voir historique</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__title">Aide comptage</div>
+        <div id="gameHelp" class="card__body"></div>
+      </div>
+
+      <div class="card">
+        <div class="card__title">Nouvelle partie</div>
+        <div class="card__body">
+          <div class="row">
+            <label class="field">
+              <span class="field__label">Nombre de joueurs</span>
+              <select id="playersCount"></select>
+            </label>
+            <label class="field">
+              <span class="field__label">Nom de la partie (optionnel)</span>
+              <input id="sessionLabel" class="input" type="text" placeholder="ex: Soirée Makers" maxlength="40" />
+            </label>
+          </div>
+
+          <div id="playersInputs" class="playersInputs"></div>
+
+          <div class="row row--right">
+            <button class="btn" id="btnStart">Démarrer</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="liveSession" class="liveSession hidden">
+        <div class="card">
+          <div class="card__title">
+            Partie en cours
+            <span class="pill" id="sessionStatus"></span>
+          </div>
+          <div class="card__body">
+            <div class="row row--wrap">
+              <button class="btn" id="btnAddRound">+ Ajouter une manche</button>
+              <button class="btn btn--ghost" id="btnUndoRound">Annuler dernière manche</button>
+              <button class="btn btn--danger" id="btnEndSession">Fin de partie</button>
+              <button class="btn btn--ghost" id="btnPinSession" title="Épingler pour conserver au-delà de 24h">☆ Favori</button>
+              <button class="btn btn--ghost hidden" id="btnDuplicate">Dupliquer</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="tableWrap">
+              <table class="scoreTable" id="scoreTable">
+                <thead id="scoreHead"></thead>
+                <tbody id="scoreBody"></tbody>
+                <tfoot id="scoreFoot"></tfoot>
+              </table>
+            </div>
+
+            <div class="muted tiny" id="sessionInfo"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating rules button -->
+      <button class="fab" id="fabRules" aria-label="Ouvrir règles PDF" title="Règles PDF">PDF</button>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="viewHistory" class="view" aria-label="Historique">
+      <div class="historyHead">
+        <button class="btn btn--ghost" id="btnBackFromHistory">← Retour</button>
+        <h2>Historique</h2>
+      </div>
+
+      <div class="card">
+        <div class="card__title">Dernières parties</div>
+        <div class="card__body">
+          <div class="row row--wrap row--between">
+            <div class="row row--wrap">
+              <button class="btn btn--ghost" id="btnSelectAll">Tout sélectionner</button>
+              <button class="btn btn--ghost" id="btnClearSelection">Désélectionner</button>
+            </div>
+            <div class="row row--wrap">
+              <label class="check">
+                <input type="checkbox" id="chkIncludeRounds" />
+                <span>Inclure le détail des manches</span>
+              </label>
+              <button class="btn" id="btnExportPdf">Exporter PDF</button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div id="historyList" class="historyList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div id="footerText">©</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
