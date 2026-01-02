@@ -1,0 +1,6 @@
+{
+  "siteName": "LudoScore",
+  "tagline": "Compteur de points minimaliste pour jeux de société",
+  "footerText": "© Nadak 2026 — Stockage local 24h (sauf favoris).",
+  "logoPath": "assets/logo.svg"
+}
