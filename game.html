@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>Jeu — ScoreKit</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <img id="siteLogo" class="brand__logo" alt="Logo" />
+      <div class="brand__text">
+        <div id="siteName" class="brand__name">ScoreKit</div>
+        <div id="siteTagline" class="brand__tagline"></div>
+      </div>
+    </a>
+
+    <nav class="nav">
+      <a class="nav__btn" href="history.html">Historique</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="game-hero" id="gameHero">
+      <div class="game-hero__left">
+        <img id="gameLogo" class="game-hero__logo" alt="Logo jeu" />
+        <div class="game-hero__titles">
+          <h1 id="gameName" class="game-hero__name">Jeu</h1>
+          <div id="gameMeta" class="muted"></div>
+        </div>
+      </div>
+
+      <div class="game-hero__actions">
+        <a id="rulesBtn" class="btn btn--ghost" target="_blank" rel="noopener">Règle PDF</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card__title">Comptage</div>
+      <p id="gameScoring" class="card__text"></p>
+    </section>
+
+    <section class="card">
+      <div class="card__title">Nouvelle partie</div>
+
+      <form id="newGameForm" class="form form--stacked">
+        <label class="field">
+          <span class="field__label">Nombre de joueurs</span>
+          <input id="playersCount" class="input" type="number" inputmode="numeric" min="2" max="10" value="2" required />
+        </label>
+
+        <div id="playersFields" class="players-fields"></div>
+
+        <button class="btn btn--primary" type="submit">Démarrer</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="card__title">Parties en cours</div>
+      <div id="activeGames" class="active-games"></div>
+      <div class="hint muted">Astuce : “Fin de partie” fige la partie (tu peux ensuite dupliquer).</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span id="footerText"></span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function init() {
+      await App.initCommon();
+      const { games } = await App.loadGames();
+
+      const params = new URLSearchParams(location.search);
+      const gameId = params.get("id");
+      const game = games.find(g => g.id === gameId);
+      if (!game) {
+        location.href = "index.html";
+        return;
+      }
+
+      App.mountGamePage(game);
+      App.registerSW();
+    })();
+  </script>
+</body>
+</html>
