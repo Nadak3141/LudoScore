@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>Historique — ScoreKit</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <img id="siteLogo" class="brand__logo" alt="Logo" />
+      <div class="brand__text">
+        <div id="siteName" class="brand__name">ScoreKit</div>
+        <div id="siteTagline" class="brand__tagline"></div>
+      </div>
+    </a>
+
+    <nav class="nav">
+      <a class="nav__btn" href="index.html">Jeux</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="h1">Historique</h1>
+
+    <section class="card">
+      <div class="history-actions">
+        <label class="checkbox">
+          <input id="includeRounds" type="checkbox" />
+          <span>Inclure le détail des manches</span>
+        </label>
+        <button id="exportBtn" class="btn btn--primary" type="button">Exporter PDF</button>
+      </div>
+
+      <div id="historyList" class="history-list"></div>
+      <div class="hint muted">Les parties expirent au bout de 24h sauf celles épinglées ⭐.</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span id="footerText"></span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function init() {
+      await App.initCommon();
+      const { games } = await App.loadGames();
+      App.mountHistoryPage(games);
+      App.registerSW();
+    })();
+  </script>
+</body>
+</html>
