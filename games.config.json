@@ -22,8 +22,8 @@
     },
     {
       "id": "flip7",
-      "name": "Flip 7",
-      "accent": "#7c5cff",
+      "name": "Flip 777",
+      "accent": "#fef300",
       "logo": "assets/games/flip7.svg",
       "rulesPdf": "assets/rules/flip7.pdf",
       "minPlayers": 2,
